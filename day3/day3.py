@@ -32,3 +32,17 @@ def part2() -> int:
     Returns:
         int: The summed value
     """
+    groups = []
+    for i in range(0, len(bags) - 2, 3):
+        groups.append((set(bags[i]), set(bags[i+1]), set(bags[i+2])))
+
+    priority_score = 0
+
+    for group in groups:
+        overlapping_letters = group[0].intersection(group[1]).intersection(group[2])
+        for letter in overlapping_letters:
+            priority_score += letter_dict.get(letter)
+
+    return priority_score
+
+print(part2())
