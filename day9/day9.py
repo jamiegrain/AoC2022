@@ -209,3 +209,7 @@ def part2():
     print(len(tail9.positions_visited))
 
 part1()
+
+# So why am I not getting the correct answer? Well, it's to do with how the rope moves
+# My initial understanding was that the rope would move a la snake. This is not the case
+# and the rope can move sideways. This can be left as an exercise to be done some other time
