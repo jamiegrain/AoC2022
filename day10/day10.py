@@ -4,15 +4,23 @@ class CPU:
         self.x = 1
         self.cycle_number = 0
         self.x_hist = []
+        self.crt = ['#']
 
     def noop(self):
         self.cycle_number += 1
         self.x_hist.append(self.x)
+        self.add_pixel()
 
     def addx(self, x):
         self.noop()
         self.x += x
         self.noop()
+
+    def add_pixel(self):
+        if self.x in ((self.cycle_number - 1) % 40, self.cycle_number % 40, (self.cycle_number + 1) % 40):
+            self.crt.append('#')
+        else:
+            self.crt.append('.')
 
 def setup():
     with open('day10/input.txt', 'r') as file:
@@ -39,5 +47,20 @@ def find_signal_strength_sum():
 
     print(signal_sum)
 
-execute_instructions()
-find_signal_strength_sum()
+def part1():
+    execute_instructions()
+    find_signal_strength_sum()
+    
+# part1()
+
+def draw_letters():
+    cycles = [0] + list(range(0, 241, 40))
+    for i in range(len(cycles) - 1):
+        print(''.join(cpu.crt[cycles[i]:cycles[i+1]]))
+
+def part2():
+    execute_instructions()
+    draw_letters()
+
+part2()
+
